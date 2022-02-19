@@ -1,5 +1,5 @@
 ---
-title: Configuring OpenID Connect in HashiCorp Vault
+title: Configurar OpenID Connect en HashiCorp Vault
 shortTitle: Configurar OpenID Connect en HashiCorp Vault
 intro: Use OpenID Connect within your workflows to authenticate with HashiCorp Vault.
 miniTocMaxHeadingLevel: 3
@@ -19,7 +19,7 @@ topics:
 
 OpenID Connect (OIDC) allows your {% data variables.product.prodname_actions %} workflows to authenticate with a HashiCorp Vault to retrieve secrets.
 
-Esta guía te proporciona un resumen de cómo configurar la Bóveda de HashiCorp para que confíe en el OIDC de {% data variables.product.prodname_dotcom %} como una entidad federada y demuestra cómo utilizar esta configuración en [`hashicorp/vault-action`](https://github.com/hashicorp/vault-action) para recuperar secretos de la Bóveda de HashiCorp.
+This guide gives an overview of how to configure HashiCorp Vault to trust {% data variables.product.prodname_dotcom %}'s OIDC as a federated identity, and demonstrates how to use this configuration in the [hashicorp/vault-action](https://github.com/hashicorp/vault-action) action to retrieve secrets from HashiCorp Vault.
 
 ## Prerrequisitos
 
@@ -54,14 +54,7 @@ This example demonstrates how to use OIDC with the official action to request a 
 
 ### Agregar ajustes de permisos
 
-El flujo de trabajo requerirá una configuración de `permissions` con un valor de [`id-token`](/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) definido. Si solo necesitas recuperar un token de OIDC para un solo job, entonces este permiso puede configurarse dentro de dicho job. Por ejemplo:
-
-```yaml{:copy}
-permissions:
-  id-token: write
-```
-
-Puede que necesites especificar permisos adicionales aquí, dependiendo de los requisitos de tu flujo de trabajo.
+ {% data reusables.actions.oidc-permissions-token %}
 
 ### Requesting the access token
 

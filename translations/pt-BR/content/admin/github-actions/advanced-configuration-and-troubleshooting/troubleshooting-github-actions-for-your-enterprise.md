@@ -14,6 +14,10 @@ redirect_from:
 shortTitle: Solução de problemas do GitHub Actions
 ---
 
+## Verificando a saúde de {% data variables.product.prodname_actions %}
+
+Você pode verificar a saúde de {% data variables.product.prodname_actions %} em {% data variables.product.product_location %} com o utilitário da linha de comando `ghe-actions-check`. Para obter mais informações, consulte "[Utilitários de linha de comando](/admin/configuration/configuring-your-enterprise/command-line-utilities#ghe-actions-check)" e "[Acessando o shell administrativo (SSH)](/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh)".
+
 ## Configurar executores auto-hospedados ao usar um certificado autoassinado por {% data variables.product.prodname_ghe_server %}
 
 {% data reusables.actions.enterprise-self-signed-cert %} Para obter mais informações, consulte "[Configurar TLS](/admin/configuration/configuring-tls)".
@@ -48,9 +52,11 @@ Se você usa ações do contêiner do Docker ou contêineres de serviço nos seu
 
 Se estas configurações não estiverem definidas corretamente, você poderá receber erros como `Recurso movido inesperadamente para https://<IP_ADDRESS>` ao definir ou mudar a configuração de {% data variables.product.prodname_actions %}.
 
-## Os executores que não se conectam a {% data variables.product.prodname_ghe_server %} depois de mudar o hostname
+## Os executores não se conectam a {% data variables.product.prodname_ghe_server %} com um novo nome de host
 
-Se você alterar o nome do host de {% data variables.product.product_location %}, os executores auto-hospedados não poderão conectar-se ao host antigo e não executarão nenhum trabalho.
+{% data reusables.enterprise_installation.changing-hostname-not-supported %}
+
+Se você implantar {% data variables.product.prodname_ghe_server %} no seu ambiente com um novo nome de host e o antigo nome de host não resolver mais a sua instância, os executores auto-hospedados não conseguirão conectar-se ao nome de host antigo e não executarão nenhum trabalho.
 
 Você precisará atualizar a configuração dos seus executores auto-hospedados para usar o novo nome de host para {% data variables.product.product_location %}. Cada executor auto-hospedado exigirá um dos seguintes procedimentos:
 
@@ -177,5 +183,45 @@ Há três maneiras de resolver este problema:
     $ ghe-config-apply
     ```
 1. Volte para o {% data variables.product.prodname_ghe_server %}.
+
+{% endif %}
+
+{% ifversion ghes > 3.3 %}
+
+<a name="bundled-actions"></a>
+
+## Troubleshooting bundled actions in {% data variables.product.prodname_actions %}
+
+If you receive the following error when installing {% data variables.product.prodname_actions %} in {% data variables.product.prodname_ghe_server %}, you can resolve the problem by installing the official bundled actions and starter workflows.
+
+```shell
+A part of the Actions setup had problems and needs an administrator to resolve.
+```
+
+To install the official bundled actions and starter workflows within a designated organization in {% data variables.product.prodname_ghe_server %}, follow this procedure.
+
+1. Identify an organization that will store the official bundled actions and starter worflows. You can create a new organization or reuse an existing one.
+    - To create a new organization, see "[Creating a new organization from scratch](/organizations/collaborating-with-groups-in-organizations/creating-a-new-organization-from-scratch)."
+    - For assistance with choosing a name for this organization, see "[Reserved Names](/admin/github-actions/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server#reserved-names)."
+
+1. Efetue o login no shell administrativo usando SSH. Para obter mais informações, consulte "[Acessar o shell administrativo (SSH)](/admin/configuration/accessing-the-administrative-shell-ssh)".
+1. To designate your organization as the location to store the bundled actions, use the `ghe-config` command, replacing `ORGANIZATION` with the name of your organization.
+    ```shell
+    $ ghe-config app.actions.actions-org ORGANIZATION
+    ```
+    e:
+    ```shell
+    $ ghe-config app.actions.github-org ORGANIZATION
+    ```
+1.  To add the bundled actions to your organization, unset the SHA.
+    ```shell
+    $ ghe-config --unset 'app.actions.actions-repos-sha1sum'
+    ```
+1. Aplique a configuração.
+    ```shell
+    $ ghe-config-apply
+    ```
+
+After you've completed these steps, you can resume configuring {% data variables.product.prodname_actions %} at "[Managing access permissions for GitHub Actions in your enterprise](/admin/github-actions/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server#managing-access-permissions-for-github-actions-in-your-enterprise)."
 
 {% endif %}

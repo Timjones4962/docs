@@ -100,6 +100,10 @@ Você pode aplicar políticas para controlar como {% data variables.product.prod
 
 {% data reusables.github-actions.private-repository-forks-overview %}
 
+Se uma política for habilitada para uma empresa, ela poderá ser desabilitada seletivamente em organizações individuais ou repositórios. Se uma política estiver desabilitada para uma empresa, as organizações individuais ou repositórios não poderão habilitá-la.
+
+{% data reusables.github-actions.private-repository-forks-options %}
+
 {% data reusables.enterprise-accounts.access-enterprise %}
 {% data reusables.enterprise-accounts.policies-tab %}
 {% data reusables.enterprise-accounts.actions-tab %}

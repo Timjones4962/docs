@@ -390,7 +390,7 @@ $    {% data variables.product.api_url_pre %}/users/defunkt
 
 O status `304` indica que o recurso não mudou desde a última vez que pedimos e a resposta não conterá texto. Como um bônus, as respostas de `304` não contam contra o seu [limite de taxa][rate-limiting].
 
-Nossa! Agora você sabe o básico da API {% ifversion fpt or ghec %}{% data variables.product.prodname_dotcom %}{% else %}{% data variables.product.product_name %}{% endif %}!
+Agora você sabe o básico da API {% ifversion fpt or ghec %}{% data variables.product.prodname_dotcom %}{% else %}{% data variables.product.product_name %}{% endif %}!
 
 * Autenticação básica do & OAuth
 * Buscar e criar de repositórios e problemas
@@ -412,8 +412,8 @@ Continue aprendendo com o próximo guia da API [Princípios básicos da autentic
 [issues-api]: /rest/reference/issues
 [link-header]: https://www.w3.org/wiki/LinkHeader
 [conditional-requests]: /rest#conditional-requests
-[rate-limiting]: /rest#rate-limiting
-[rate-limiting]: /rest#rate-limiting
+[rate-limiting]: /rest/overview/resources-in-the-rest-api#rate-limit-http-headers
+[rate-limiting]: /rest/overview/resources-in-the-rest-api#rate-limit-http-headers
 [users api]: /rest/reference/users#get-a-user
 [defunkt github]: https://github.com/defunkt
 [defunkt github]: https://github.com/defunkt

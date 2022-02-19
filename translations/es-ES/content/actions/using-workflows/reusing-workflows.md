@@ -16,6 +16,7 @@ topics:
 ---
 
 {% data reusables.actions.enterprise-beta %}
+{% data reusables.actions.reusable-workflows-ghes-beta %}
 {% data reusables.actions.enterprise-github-hosted-runners %}
 
 ## Resumen
@@ -33,6 +34,8 @@ A un flujo de trabajo que utiliza otro flujo de trabajo se le llama flujo de tra
 Si utilizas un flujo de trabajo desde un repositorio diferente, cualquier acción en el flujo de trabajo llamado se ejecutará como si fuera parte del llamante. Por ejemplo, si el flujo de trabajo llamado utiliza `actions/checkout`, la acción verifica el contenido del repositorio que hospeda el flujo de trabajo llamante y no el llamado.
 
 Cuando un flujo de trabajo llamante activa uno reutilizable, el contexto `github` siempre se asocia con el flujo llamante. Se otorga acceso automáticamente al flujo de trabajo llamado para `github.token` y `secrets.GITHUB_TOKEN`. Para obtener más información sobre el contexto `github`, consulta la sección "[Sintaxis de contexto y expresión para GitHub Actions](/actions/reference/context-and-expression-syntax-for-github-actions#github-context)".
+
+You can view the reused workflows referenced in your {% data variables.product.prodname_actions %} workflows as dependencies in the dependency graph of the repository containing your workflows. Para obtener más información, consulta la sección "[Acerca de la gráfica de dependencias](/code-security/supply-chain-security/understanding-your-software-supply-chain/about-the-dependency-graph)".
 
 ### Flujos de trabajo reutilizables e iniciales
 
@@ -110,7 +113,7 @@ Puedes definir entradas y secretos, las cuales pueden pasarse desde el flujo de 
        runs-on: ubuntu-latest
        environment: production
        steps:
-         - uses: ./.github/actions/my-action@v1
+         - uses: ./.github/actions/my-action
            with:
              username: ${{ inputs.username }}
              token: ${{ secrets.envPAT }}
@@ -151,7 +154,7 @@ jobs:
     name: Pass input and secrets to my-action
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/my-action@v1
+      - uses: ./.github/actions/my-action
         with:
           username: ${{ inputs.username }}
           token: ${{ secrets.token }}
@@ -164,9 +167,9 @@ Se llama a un flujo de trabajo reutilizable utilizando la palabra clave `uses`. 
 
 [`jobs.<job_id>.uses`](/actions/reference/workflow-syntax-for-github-actions#jobsjob_iduses)
 
-Se referencian los archivos de flujo de trabajo reutilizables utilizando la sintaxis:
+You reference reusable workflow files using {% ifversion fpt or ghec or ghes > 3.4 or ghae-issue-6000 %}one of the following syntaxes:{% else %}the syntax:{% endif %}
 
-`{owner}/{repo}/{path}/{filename}@{ref}`
+{% data reusables.actions.reusable-workflow-calling-syntax %}
 
 Puedes llamar a flujos de trabajo múltiples, referenciando cada uno en un job separado.
 

@@ -32,7 +32,7 @@ Este artículo explica cómo los administradores de sitio pueden habilitar {% da
 
 {% data reusables.actions.migrating-enterprise %}
 
-## Revisar las consideraciones de hardware
+## Review hardware requirements
 
 {% ifversion ghes = 3.0 %}
 
@@ -46,7 +46,7 @@ Este artículo explica cómo los administradores de sitio pueden habilitar {% da
 
 {%- ifversion ghes < 3.2 %}
 
-Los recursos de CPU y de memoria que están disponibles para {% data variables.product.product_location %} determinan el rendimiento máximo de jobs para {% data variables.product.prodname_actions %}.
+The CPU and memory resources available to {% data variables.product.product_location %} determine the maximum job throughput for {% data variables.product.prodname_actions %}. {% data reusables.actions.minimum-hardware %}
 
 Las pruebas internas de {% data variables.product.company_short %} demostraron el siguiente rendimiento máximo para las instancias de {% data variables.product.prodname_ghe_server %} con un rango de CPU y configuraciones de memoria. Puede que vas rendimientos diferentes dependiendo de los niveles generales de actividad en tu instancia.
 
@@ -54,7 +54,7 @@ Las pruebas internas de {% data variables.product.company_short %} demostraron e
 
 {%- ifversion ghes > 3.1 %}
 
-Los recursos de memoria y CPU que {% data variables.product.product_location %} tiene disponibles determinan la cantidad de jobs que se pueden ejecutar simultáneamente sin pérdida de rendimiento.
+The CPU and memory resources available to {% data variables.product.product_location %} determine the number of jobs that can be run concurrently without performance loss. {% data reusables.actions.minimum-hardware %}
 
 La cantidad máxima de ejecución simultánea de jobs sin pérdida de rendimiento depende de factores tales como la duración de los jobs, el uso de artefactos, la cantidad de repositorios ejecutando acciones y qué tanto trabajo adicional sin relación a las acciones ejecuta tu instancia. Las pruebas internas en GitHub demostraron los siguientes objetivos de rendimiento para GitHub Enterprise Server en un rango de configuraciones de memoria y CPU:
 
@@ -113,6 +113,8 @@ Para habilitar {% data variables.product.prodname_actions %} en {% data variable
 **Nota:** Estos son los únicos proveedores de almacenamiento compatibles con {% data variables.product.company_short %} y sobre los que éste puede proporcionar asistencia. Es muy poco probable que otros proveedores de almacenamiento de S3 compatibles con la API funcionen, debido a las diferencias de la API de S3. [Contáctanos](https://support.github.com/contact) para solicitar soporte para proveedores de almacenamiento adicionales.
 
 {% endnote %}
+
+Before you enable {% data variables.product.prodname_actions %}, you can test your storage configuration from the administrative shell with the `ghe-actions-precheck` utility. For more information, see "[Command-line utilities](/admin/configuration/configuring-your-enterprise/command-line-utilities#ghe-actions-check)" and "[Accessing the administrative shell (SSH)](/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh)."
 
 ## Consideraciones de las conexiones
 

@@ -92,7 +92,7 @@ core.setOutput('SELECTED_COLOR', 'green');
 
 设置操作的输出参数。
 
-（可选）您也可以在操作的元数据文件中声明输出参数。 更多信息请参阅“[{% data variables.product.prodname_actions %} 的元数据语法](/articles/metadata-syntax-for-github-actions#outputs)”。
+（可选）您也可以在操作的元数据文件中声明输出参数。 For more information, see "[Metadata syntax for {% data variables.product.prodname_actions %}](/articles/metadata-syntax-for-github-actions#outputs-for-docker-container-and-javascript-actions)."
 
 ### 示例
 
@@ -292,7 +292,7 @@ Only the second `set-output` and `echo` workflow commands are included in the lo
 
 您可以使用 `save-state` 命令来创建环境变量，以便与工作流程的 `pre:` 或 `post:` 操作共享。 例如，您可以使用 `pre:` 操作创建文件，将该文件位置传给 `main:` 操作，然后使用 `post:` 操作删除文件。 或者，您可以使用 `main:` 操作创建文件，将该文件位置传给 `post:` 操作，然后使用 `post:` 操作删除文件。
 
-如果您有多个 `pre:` 或 `post:` 操作，则只能访问使用了 `save-state` 的操作中的已保存值。 有关 `post:` 操作的更多信息，请参阅“[{% data variables.product.prodname_actions %} 的元数据语法](/actions/creating-actions/metadata-syntax-for-github-actions#post)”。
+如果您有多个 `pre:` 或 `post:` 操作，则只能访问使用了 `save-state` 的操作中的已保存值。 有关 `post:` 操作的更多信息，请参阅“[{% data variables.product.prodname_actions %} 的元数据语法](/actions/creating-actions/metadata-syntax-for-github-actions#runspost)”。
 
 `save-state` 命令只能在操作内运行，并且对 YAML 文件不可用。 保存的值将作为环境值存储，带 `STATE_` 前缀。
 
@@ -308,13 +308,15 @@ console.log('::save-state name=processID::12345')
 console.log("The running PID from the main action is: " +  process.env.STATE_processID);
 ```
 
-## 环境文件
+## Environment files
 
 在工作流程执行期间，运行器生成可用于执行某些操作的临时文件。 这些文件的路径通过环境变量显示。 写入这些文件时，您需要使用 UTF-8 编码，以确保正确处理命令。 多个命令可以写入同一个文件，用换行符分隔。
 
 {% warning %}
 
-**Warning:** On Windows, legacy PowerShell (`shell: powershell`) does not use UTF-8 by default. 请确保使用正确的编码写入文件。 例如，在设置路径时需要设置 UTF-8 编码：
+**Warning:** On Windows, legacy PowerShell (`shell: powershell`) does not use UTF-8 by default.
+
+When using `shell: powershell`, you must specify UTF-8 encoding. 例如：
 
 ```yaml
 jobs:
@@ -325,38 +327,17 @@ jobs:
         run: echo "mypath" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 ```
 
-Or switch to PowerShell Core, which defaults to UTF-8:
-
-```yaml
-jobs:
-  modern-pwsh-example:
-    uses: windows-2019
-    steps:
-      - shell: pwsh
-        run: echo "mypath" | Out-File -FilePath $env:GITHUB_PATH -Append # no need for -Encoding utf8
-```
-
-More detail about UTF-8 and PowerShell Core found on this great [Stack Overflow answer](https://stackoverflow.com/a/40098904/162694):
-
-> ### Optional reading: The cross-platform perspective: PowerShell _Core_:
-> 
-> [PowerShell is now cross-platform](https://blogs.msdn.microsoft.com/powershell/2016/08/18/powershell-on-linux-and-open-source-2/), via its **[PowerShell _Core_](https://github.com/PowerShell/PowerShell)** edition, whose encoding - sensibly - ***defaults to ***BOM-less UTF-8******, in line with Unix-like platforms.
+Alternatively, you can use PowerShell Core (`shell: pwsh`), which defaults to UTF-8.
 
 {% endwarning %}
 
 ## 设置环境变量
 
 ``` bash
-echo "{name}={value}" >> $GITHUB_ENV
+echo "{environment_variable_name}={value}" >> $GITHUB_ENV
 ```
 
-为作业中接下来运行的任何步骤创建或更新环境变量。 创建或更新环境变量的步骤无法访问新值，但在作业中的所有后续步骤均可访问。 环境变量区分大小写，并且可以包含标点符号。
-
-{% note %}
-
-**Note:** Environment variables must be explicitly referenced using the [`env` context](/actions/reference/context-and-expression-syntax-for-github-actions#env-context) in expression syntax or through use of the `$GITHUB_ENV` file directly; environment variables are not implicitly available in shell commands.
-
-{% endnote %}
+You can make an environment variable available to any subsequent steps in a workflow job by defining or updating the environment variable and writing this to the `GITHUB_ENV` environment file. 创建或更新环境变量的步骤无法访问新值，但在作业中的所有后续步骤均可访问。 The names of environment variables are case-sensitive, and you can include punctuation. 更多信息请参阅“[环境变量](/actions/learn-github-actions/environment-variables)”。
 
 ### 示例
 

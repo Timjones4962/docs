@@ -25,6 +25,10 @@ Os projetos são uma coleção personalizável de itens que se mantêm atualizad
 
 {% data reusables.projects.create-user-project %}
 
+## Atualizando a descrição e o README do seu projeto
+
+{% data reusables.projects.project-description %}
+
 ## Adicionando itens ao seu projeto
 
 Seu projeto pode acompanhar os rascunhos de problemas, problemas e pull requests.
@@ -37,11 +41,11 @@ Os rascunhos são úteis para capturar ideias rapidamente.
 1. Digite sua ideia e, em seguida, pressione **Enter**.
 1. Para adicionar texto, clique no título do problema do rascunho. Na caixa de entrada do markdown que será exibida, digite o texto para o texto do problema do rascunho e clique em **Salvar**.
 
-Os problemas do rascunho podem ter um título, texto, responsável e quaisquer campos personalizados do seu projeto. In order to populate the repository, labels, or milestones for a draft issue, you must first convert the draft issue to an issue. For more information, see "[Converting draft issues to issues](#converting-draft-issues-to-issues)."
+Os problemas do rascunho podem ter um título, texto, responsável e quaisquer campos personalizados do seu projeto. Para preencher o repositório, etiquetas ou marcos para o rascunho de um problema, você deverá primeiro converter o rascunho do problema em um problema. Para obter mais informações, consulte "[Convertendo rascunhos de problema em problemas](#converting-draft-issues-to-issues). "
 
 {% note %}
 
-**Note**: Users will not receive notifications when they are assigned to or mentioned in a draft issue unless the draft issue is converted to an issue.
+**Observação**: Os usuários não receberão notificações quando forem atribuídos ou mencionados em um rascunho de problema, a menos que o rascunho do probelam seja convertido em um problema.
 
 {% endnote %}
 
@@ -75,7 +79,7 @@ No layout de tabela:
 1. Clique em {% octicon "triangle-down" aria-label="the item menu" %} no rascunho do problema que você deseja converter.
 2. Selecione **Converter para problema**.
 3. Selecione o repositório ao qual você deseja adicionar o problema.
-4. Alternatively, edit the `labels`, `milestone`, or `repository` fields of the draft issue that you want to convert.
+4. Como alternativa, edite os campos `etiquetas`, `marco` ou `repository` do rascunho do problema que você deseja converter.
 
 Layout do quadro:
 
@@ -106,7 +110,7 @@ Como os valores do campo mudam, eles são sincronizados automaticamente para que
 
 ### Mostrando campos existentes
 
-Your project tracks up-to-date information about issues and pull requests, including any changes to the title, assignees, labels, milestones, repository, reviewers, and linked pull requests. Quando seu projeto é inicializado, são exibidos "título" e "responsáveis". Os outros campos permanecem ocultos. Você pode alterar a visibilidade desses campos no seu projeto.
+O seu projeto rastreia informações atualizadas sobre problemas e pull requests, incluindo todas as alterações no título, responsáveis, etiquetas, marcos, repositórios, revisores e pull requests vinculados. Quando seu projeto é inicializado, são exibidos "título" e "responsáveis". Os outros campos permanecem ocultos. Você pode alterar a visibilidade desses campos no seu projeto.
 
 1. {% data reusables.projects.open-command-palette %}
 2. Comece a digitar "mostrar".
@@ -156,15 +160,15 @@ Você pode habilitar ou desabilitar os fluxos de trabalho internos para o seu pr
 
 {% data reusables.projects.enable-basic-workflow %}
 
-## Adding your project to a repository
+## Adicionando seu projeto a um repositório
 
-You can list relevant projects in a repository. You can only list projects that are owned by the same user or organization that owns the repository.
+Você pode listar projetos relevantes em um repositório. Você só pode listar projetos que pertencem ao mesmo usuário ou organização proprietária do repositório.
 
-In order for repository members to see a project listed in a repository, they must have visibility for the project. For more information, see "[Managing the visibility of your projects (beta)](/issues/trying-out-the-new-projects-experience/managing-the-visibility-of-your-projects)" and "[Managing access to projects (beta)](/issues/trying-out-the-new-projects-experience/managing-access-to-projects)."
+Para que os participantes do repositório vejam um projeto listado em um repositório, eles deverão ter visibilidade sobre o projeto. Para obter mais informações, consulte "[Gerenciando a visibilidade dos seus projetos (beta)](/issues/trying-out-the-new-projects-experience/managing-the-visibility-of-your-projects)" e "[Gerenciando o acesso a projetos (beta)](/issues/trying-out-the-new-projects-experience/managing-access-to-projects)".
 
-1. On {% data variables.product.prodname_dotcom %}, navigate to the main page of your repository.
+1. No {% data variables.product.prodname_dotcom %}, navegue até a página principal do seu repositório.
 1. Clique em {% octicon "table" aria-label="the project icon" %} **Projetos**.
-1. Click **Projects (Beta)** in the side bar.
-1. Click **Add project**.
-1. In the search bar that appears, search for projects that are owned by the same user or organization that owns the repository.
-1. Click on a project to list it in your repository.
+1. Clique em **Projetos (Beta)** na barra lateral.
+1. Clique **Adicionar projeto**.
+1. Na barra de pesquisa que aparece, pesquise por projetos pertentencentes ao mesmo usuário ou organização proprietária do repositório.
+1. Clique em um projeto para listá-lo no seu repositório.
