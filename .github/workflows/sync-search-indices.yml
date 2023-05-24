@@ -51,7 +51,7 @@ jobs:
           exit 1 # prevents further steps from running
       # Check out internal docs repository
       - name: checkout
-        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
         with:
           token: ${{ secrets.DOCS_BOT_FR }}
 
